@@ -53,10 +53,10 @@ class TinifyService extends Component
         $assetFilePath = Yii::getAlias($volumePath) . $folderPath . '/' . $asset->filename;
         if($resizeOptions){
             $tinyPath = Yii::getAlias(Tinify::getInstance()->settings->sourceDir) . $folderPath . '/' . $resizeOptions['name'] . '/' . $asset->filename;
-            $webPath = Yii::getAlias(Tinify::getInstance()->settings->publicDir)  . $folderPath  . '/' . $asset->filename;
+            $webPath = Yii::getAlias(Tinify::getInstance()->settings->publicDir)  . $folderPath  . '/' . $resizeOptions['name'] . '/' . $asset->filename;
         } else {
             $tinyPath = Yii::getAlias(Tinify::getInstance()->settings->sourceDir) . $folderPath . '/' . $asset->filename;
-            $webPath = Yii::getAlias(Tinify::getInstance()->settings->publicDir)  . $folderPath  . '/' . $resizeOptions['name'] . $asset->filename;
+            $webPath = Yii::getAlias(Tinify::getInstance()->settings->publicDir)  . $folderPath  . '/' .  $asset->filename;
 
         }
         if(!is_dir(dirname($tinyPath))){
@@ -65,7 +65,7 @@ class TinifyService extends Component
         if(!is_file($tinyPath)){
             $tiny = TinifyApi\fromFile($assetFilePath);
             if($resizeOptions){
-                $tinyPath = Yii::getAlias(Tinify::getInstance()->settings->sourceDir) . $folderPath . '/' . $resizeOptions['name'] . '/' . $asset->filename;
+                unset($resizeOptions['name']);
                 $tiny = $tiny->resize($resizeOptions);
             }
             $tiny->toFile($tinyPath);
