@@ -45,20 +45,24 @@ class TinifyService extends Component
      *
      * @return mixed
      */
-    public function tinifyAsset($url)
+    public function tinifyAsset(Asset $asset, $resizeOptions = null)
     {
 
-        $tinyPath = Yii::getAlias(Tinify::getInstance()->settings->sourceDir) . $url;
-        $webPath = Yii::getAlias(Tinify::getInstance()->settings->publicDir) . $url;
+        $volumePath = $asset->getVolume()->settings['path'];
+        $folderPath = $asset->getFolder()->path;
+        $assetFilePath = Yii::getAlias($volumePath) . $folderPath . '/' . $asset->filename;
+        $tinyPath = Yii::getAlias(Tinify::getInstance()->settings->sourceDir) . $folderPath . '/' . $asset->filename;
+
+        $webPath = Yii::getAlias(Tinify::getInstance()->settings->publicDir)  . $folderPath  . '/' . $asset->filename;
         if(!is_dir(dirname($tinyPath))){
             mkdir(dirname($tinyPath), 0755, true);
         }
         if(!is_file($tinyPath)){
-            if(Tinify::getInstance()->settings->type === 'local'){
-                $tiny = TinifyApi\fromFile(Yii::getAlias('@webroot')  . $url)->toFile($tinyPath);
-            } else {
-                $tiny = TinifyApi\fromUrl($url)->toFile($tinyPath);
+            $tiny = TinifyApi\fromFile($assetFilePath);
+            if($resize){
+                $tiny->resize($resizeOptions);
             }
+            $tiny->toFile($tinyPath);
         }
         return $webPath;
 
