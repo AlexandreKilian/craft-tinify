@@ -2,7 +2,7 @@
     "name": "alexk/tinify",
     "description": "A plugin to convert assets using tinyPng",
     "type": "craft-plugin",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "keywords": [
         "craft",
         "cms",
