@@ -76,10 +76,10 @@ class TinifyTwigExtension extends \Twig_Extension
      *
      * @return string
      */
-    public function tinify($url)
+    public function tinify($url, $resizeOptions = null)
     {
 
-        return Tinify::getInstance()->tinify->tinifyAsset($url);
+        return Tinify::getInstance()->tinify->tinifyAsset($url, $resizeOptions);
 
     }
 }
