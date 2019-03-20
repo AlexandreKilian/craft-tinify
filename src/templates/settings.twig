@@ -1,0 +1,47 @@
+{# @var craft \craft\web\twig\variables\CraftVariable #}
+{#
+/**
+ * tinify plugin for Craft CMS 3.x
+ *
+ * tinify Settings.twig
+ *
+ * @author    Alexandre Kilian
+ * @copyright Copyright (c) 2019 Alexandre Kilian
+ * @link      https://www.alexkilian.com
+ * @package   Tinify
+ * @since     1.0.0
+ */
+#}
+
+{% import "_includes/forms" as forms %}
+
+{% do view.registerAssetBundle("alexk\\tinify\\assetbundles\\tinify\\TinifyAsset") %}
+
+{{ forms.textField({
+    label: 'Tinify API Key',
+    instructions: 'Enter some setting here.',
+    id: 'tinifyApiKey',
+    name: 'tinifyApiKey',
+    value: settings['tinifyApiKey']})
+}}
+{{ forms.textField({
+    label: 'Tinify Cache Directory',
+    instructions: 'Enter some setting here.',
+    id: 'sourceDir',
+    name: 'sourceDir',
+    value: settings['sourceDir']})
+}}
+{{ forms.textField({
+    label: 'Tinify Public URL',
+    instructions: 'Enter some setting here.',
+    id: 'publicDir',
+    name: 'publicDir',
+    value: settings['publicDir']})
+}}
+{{ forms.selectField({
+    first: true,
+    label: "Asset Type",
+    name: 'type',
+    options: [{value:'local', label:'Local'},{value:'remote', label:'Remote'}],
+    value: settings.type
+}) }}

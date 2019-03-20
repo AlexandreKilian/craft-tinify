@@ -1,0 +1,40 @@
+{
+    "name": "alexk/tinify",
+    "description": "A plugin to convert assets using tinyPng",
+    "type": "craft-plugin",
+    "version": "1.0.0",
+    "keywords": [
+        "craft",
+        "cms",
+        "craftcms",
+        "craft-plugin",
+        "tinify"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Alexandre Kilian",
+            "homepage": "https://www.alexkilian.com"
+        }
+    ],
+    "require": {
+        "craftcms/cms": "^3.0.0-RC1",
+        "tinify/tinify": "^1.5"
+    },
+    "autoload": {
+        "psr-4": {
+          "alexk\\tinify\\": "src/"
+        }
+    },
+    "extra": {
+        "name": "tinify",
+        "handle": "tinify",
+        "hasCpSettings": true,
+        "hasCpSection": false,
+        "changelogUrl": "???",
+        "components": {
+            "tinifyService": "alexk\\tinify\\services\\TinifyService"
+        },
+        "class": "alexk\\tinify\\Tinify"
+    }
+}
