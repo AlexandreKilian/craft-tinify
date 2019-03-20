@@ -60,7 +60,7 @@ class TinifyService extends Component
         if(!is_file($tinyPath)){
             $tiny = TinifyApi\fromFile($assetFilePath);
             if($resizeOptions){
-                $tiny->resize($resizeOptions);
+                $tiny = $tiny->resize($resizeOptions);
             }
             $tiny->toFile($tinyPath);
         }
